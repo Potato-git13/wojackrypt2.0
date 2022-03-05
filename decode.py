@@ -11,9 +11,15 @@ def decrypt(text, key):
     # Check if the last entry is empty and if so remove it
     if num_list[-1] == '':
         num_list = num_list[:-1]
-    # Iterate for every number and decode it
+
+    if key == "":
+        sys.exit("Error: key cannot be empty")
+    # Iterate for every number and decrypt it
     for num in num_list:
-        encrypted_char_int = int(num)
+        try:
+            encrypted_char_int = int(num)
+        except ValueError:
+            sys.exit(f"Error: invalid value '{num}'")
 
         # Get the length of the key
         key_len = len(key)
@@ -32,9 +38,9 @@ def decrypt(text, key):
         try:
             decrypted_char = inttochar(decrypted_char_int)
         except UnicodeDecodeError:
-            sys.exit(f"Decoding Error: Invalid int '{num}'")
+            sys.exit(f"Decoding Error: invalid int '{num}'")
         except OverflowError:
-            sys.exit(f"Decoding Error: Invalid int '{num}'")
+            sys.exit(f"Decoding Error: invalid int '{num}'")
         # Remove all null bytes
         decrypted_char = sub("\x00", "", decrypted_char)
 

@@ -1,9 +1,14 @@
 # conversions is a local module!
 from conversions import chartoint
+import sys
 
 def encrypt(text, key):
     text_encrypted = ""
     counter = 0
+
+    if key == "":
+        sys.exit("Error: key cannot be empty")
+    # Iterate for every character and encrypt it
     for char in text:
         # Convert the current character to int
         char_int = chartoint(char)
