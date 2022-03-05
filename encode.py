@@ -17,8 +17,8 @@ def encrypt(text, key):
         # Convert the char to an int
         key_char_int = chartoint(key_char)
 
-        # THE ENCRYPTION EQUATION
-        encrypted_int = char_int + (key_len + key_char_int)
+        # THE ENCRYPTION EQUATION a*2+n+b*n
+        encrypted_int = char_int*2 + key_len + key_char_int * key_len
 
         # When the key doesn't have anymore characters go back to the start
         if counter < key_len-1:

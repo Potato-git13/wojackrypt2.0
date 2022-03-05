@@ -1,6 +1,7 @@
 # conversions is a local module!
 from conversions import inttochar, chartoint
 from re import sub
+import sys
 
 def decrypt(text, key):
     text_decrypted = ""
@@ -23,11 +24,17 @@ def decrypt(text, key):
         # Convert the char to an int
         key_char_int = chartoint(key_char)
 
-        # THE DECRYPTION EQUATION
-        decrypted_char_int = encrypted_char_int - (key_len + key_char_int)
+        # THE DECRYPTION EQUATION (x-(n+b*n))/2
+        decrypted_char_int = (encrypted_char_int - (key_len + key_char_int * key_len))//2
 
-        # Conver the new decrypted int to a char
-        decrypted_char = inttochar(decrypted_char_int)
+        # Convert the new decrypted int to a char
+        decrypted_char = ""
+        try:
+            decrypted_char = inttochar(decrypted_char_int)
+        except UnicodeDecodeError:
+            sys.exit(f"Decoding Error: Invalid int '{num}'")
+        except OverflowError:
+            sys.exit(f"Decoding Error: Invalid int '{num}'")
         # Remove all null bytes
         decrypted_char = sub("\x00", "", decrypted_char)
 
