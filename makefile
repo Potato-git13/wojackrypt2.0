@@ -1,6 +1,6 @@
 linux-build:
 	mkdir -p bin/linux-build/
-	pyinstaller --onefile --distpath=bin/linux-build/ --name=wojackrypt2 main.py
+	pyinstaller --onefile --distpath=bin/linux-build/ --name=wojackrypt2 src/main.py
 
 clean:
 	rm -rf build/ wojackrypt2.spec __pycache__/
